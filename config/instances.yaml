@@ -142,7 +142,7 @@ virtualmachines:
         service: control-ceh
         targetPort: 443
         tls: true
-        tls_termination: passthrough
+        tls_termination: reencrypt
         tls_destinationCACertificate: |
           -----BEGIN CERTIFICATE-----
           MIIF1jCCA76gAwIBAgIUBQZlbUZlOmMKhspO9U4/nTJAXAEwDQYJKoZIhvcNAQEL
