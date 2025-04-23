@@ -1,13 +1,98 @@
 ---
 virtualmachines:
-  - name: "host1"
-    image: "rhel-9.5"
-    memory: "2G"
-    cores: 1
-    image_size: "40G"
+  - name: "control-ce"
+    image: "base-zero-aap-2.5-container-ce"
+    memory: "32G"
+    cores: 8
+    image_size: "30Gi"
     tags:
       - key: "AnsibleGroup"
-        value: "bastions"
+        value: "isolated"
     networks:
       - default
-      - secondary
+    services:
+      - name: control-ce
+        ports:
+          - port: 443
+            protocol: TCP
+            targetPort: 443
+            name: control-ce-https
+    routes:
+      - name: control-ce-https
+        host: control-ce
+        service: control-ce
+        targetPort: 443
+        tls: true
+        tls_termination: passthrough
+  - name: "control-ceh"
+    image: "base-zero-aap-2.5-container-ceh"
+    memory: "32G"
+    cores: 8
+    image_size: "30Gi"
+    tags:
+      - key: "AnsibleGroup"
+        value: "isolated"
+    networks:
+      - default
+    services:
+      - name: control-ceh
+        ports:
+          - port: 443
+            protocol: TCP
+            targetPort: 443
+            name: control-ceh-https
+    routes:
+      - name: control-ceh-https
+        host: control-ceh
+        service: control-ceh
+        targetPort: 443
+        tls: true
+        tls_termination: passthrough
+  - name: "control-ch"
+    image: "base-zero-aap-2.5-container-ch"
+    memory: "32G"
+    cores: 8
+    image_size: "30Gi"
+    tags:
+      - key: "AnsibleGroup"
+        value: "isolated"
+    networks:
+      - default
+    services:
+      - name: control-ch
+        ports:
+          - port: 443
+            protocol: TCP
+            targetPort: 443
+            name: control-ch-https
+    routes:
+      - name: control-ch-https
+        host: control-ch
+        service: control-ch
+        targetPort: 443
+        tls: true
+        tls_termination: passthrough
+  - name: "windows"
+    image: "base-zero-windows-2025-1"
+    memory: "16G"
+    cores: 4
+    image_size: "30Gi"
+    tags:
+      - key: "AnsibleGroup"
+        value: "isolated"
+    networks:
+      - default
+    services:
+      - name: windows-rdp
+        ports:
+          - port: 3389
+            protocol: TCP
+            targetPort: 3389
+            name: windows-rdp
+    routes:
+      - name: windows-rdp
+        host: windows-rdp
+        service: windows-rdp
+        targetPort: 3389
+        tls: true
+        tls_termination: passthrough
