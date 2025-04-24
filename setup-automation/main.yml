@@ -71,5 +71,5 @@
     ansible.builtin.fail:
       msg: "Setup failed"
     when:
-    - r_result is defined
+    - r_script_test.stat.exists
     - r_result.rc != 0
