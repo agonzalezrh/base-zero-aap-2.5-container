@@ -11,7 +11,7 @@ virtualmachines:
     networks:
       - default
     services:
-      - name: control
+      - name: control-https
         ports:
           - port: 443
             protocol: TCP
@@ -20,7 +20,7 @@ virtualmachines:
     routes:
       - name: control-https
         host: control
-        service: control
+        service: control-https
         targetPort: 443
         tls: true
         tls_termination: reencrypt
@@ -70,7 +70,7 @@ virtualmachines:
     networks:
       - default
     services:
-      - name: control-ce
+      - name: control-ce-https
         ports:
           - port: 443
             protocol: TCP
@@ -130,7 +130,7 @@ virtualmachines:
     networks:
       - default
     services:
-      - name: control-ceh
+      - name: control-ceh-https
         ports:
           - port: 443
             protocol: TCP
@@ -189,7 +189,7 @@ virtualmachines:
     networks:
       - default
     services:
-      - name: control-ch
+      - name: control-ch-https
         ports:
           - port: 443
             protocol: TCP
