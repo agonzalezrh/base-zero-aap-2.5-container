@@ -27,7 +27,7 @@ containers:
       GITEA__webhook__ALLOWED_HOST_LIST: '*'
       USER_GID: "1000"
       USER_UID: "1000"
-    memory: 2048
+    memory: 2Gi
     services:
       - name: gitea-https
         ports:
