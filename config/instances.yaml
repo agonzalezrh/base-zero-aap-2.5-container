@@ -4,7 +4,9 @@ containers:
   - name: gitea
     image: gitea/gitea:1.16.8
     ports:
-    - 3000
+      - name: gitea
+        containerPort: 3000
+        protocol: TCP
     environment:
       GITEA__DEFAULT__RUN_MODE: dev
       GITEA__database__DB_TYPE: sqlite3
@@ -27,12 +29,12 @@ containers:
       USER_UID: "1000"
     memory: 2048
     services:
-    - name: gitea-https
-      ports:
-        - port: 3000
-          protocol: TCP
-          targetPort: 3000
-          name: gitea-https
+      - name: gitea-https
+        ports:
+          - port: 3000
+            protocol: TCP
+            targetPort: 3000
+            name: gitea-https
     routes:
       - name: gitea-https
         host: gitea
