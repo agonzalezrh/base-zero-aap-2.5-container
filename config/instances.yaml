@@ -1,31 +1,43 @@
 ---
 # Containers are under development
 containers:
-- name: gitea
-  image: gitea/gitea:1.16.8
-  ports:
-  - 3000
-  environment:
-    GITEA__DEFAULT__RUN_MODE: dev
-    GITEA__database__DB_TYPE: sqlite3
-    GITEA__database__PATH: /data/gitea/gitea.db
-    GITEA__picture__DISABLE_GRAVATAR: "true"
-    GITEA__repository__DEFAULT_PRIVATE: "false"
-    GITEA__repository__DEFAULT_PUSH_CREATE_PRIVATE: "false"
-    GITEA__repository__ENABLE_PUSH_CREATE_ORG: "true"
-    GITEA__repository__ENABLE_PUSH_CREATE_USER: "true"
-    GITEA__repository__ONLY_ALLOW_PUSH_IF_GITEA_ENVIRONMENT_SET: "false"
-    GITEA__security__INSTALL_LOCK: "true"
-    GITEA__server__DOMAIN: http://gitea
-    GITEA__server__OFFLINE_MODE: "true"
-    GITEA__server__ROOT_URL: http://gitea:3000
-    GITEA__server__SSH_DOMAIN: http://gitea
-    GITEA__service__DISABLE_REGISTRATION: "true"
-    GITEA__service__REQUIRE_SIGNIN_VIEW: "false"
-    GITEA__webhook__ALLOWED_HOST_LIST: '*'
-    USER_GID: "1000"
-    USER_UID: "1000"
-  memory: 2048
+  - name: gitea
+    image: gitea/gitea:1.16.8
+    ports:
+    - 3000
+    environment:
+      GITEA__DEFAULT__RUN_MODE: dev
+      GITEA__database__DB_TYPE: sqlite3
+      GITEA__database__PATH: /data/gitea/gitea.db
+      GITEA__picture__DISABLE_GRAVATAR: "true"
+      GITEA__repository__DEFAULT_PRIVATE: "false"
+      GITEA__repository__DEFAULT_PUSH_CREATE_PRIVATE: "false"
+      GITEA__repository__ENABLE_PUSH_CREATE_ORG: "true"
+      GITEA__repository__ENABLE_PUSH_CREATE_USER: "true"
+      GITEA__repository__ONLY_ALLOW_PUSH_IF_GITEA_ENVIRONMENT_SET: "false"
+      GITEA__security__INSTALL_LOCK: "true"
+      GITEA__server__DOMAIN: http://gitea
+      GITEA__server__OFFLINE_MODE: "true"
+      GITEA__server__ROOT_URL: http://gitea:3000
+      GITEA__server__SSH_DOMAIN: http://gitea
+      GITEA__service__DISABLE_REGISTRATION: "true"
+      GITEA__service__REQUIRE_SIGNIN_VIEW: "false"
+      GITEA__webhook__ALLOWED_HOST_LIST: '*'
+      USER_GID: "1000"
+      USER_UID: "1000"
+    memory: 2048
+    services:
+    - name: gitea-https
+      ports:
+        - port: 3000
+          protocol: TCP
+          targetPort: 3000
+          name: gitea-https
+    routes:
+      - name: gitea-https
+        host: gitea
+        service: gitea-https
+        targetPort: 3000
 virtualmachines:
   - name: "control"
     image: "base-zero-aap-2.5-container"
