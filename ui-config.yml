@@ -26,3 +26,5 @@ tabs:
     url: https://control-ch-${guid}.${domain}/
   - name: windows
     url: https://windows-rdp-${guid}.${domain}/
+  - name: gitea
+    url: https://gitea-${guid}.${domain}/
