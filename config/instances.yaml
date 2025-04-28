@@ -38,6 +38,7 @@ containers:
         host: gitea
         service: gitea-https
         targetPort: 3000
+        tls: true
 virtualmachines:
   - name: "control"
     image: "base-zero-aap-2.5-container"
