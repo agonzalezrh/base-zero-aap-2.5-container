@@ -30,3 +30,4 @@ tabs:
     url: /cloud
   - name: gitea
     url: https://gitea-${guid}.${domain}/
+    external: true
