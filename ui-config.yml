@@ -24,7 +24,9 @@ tabs:
     url: https://control-ceh-${guid}.${domain}/
   - name: control-ch
     url: https://control-ch-${guid}.${domain}/
-  - name: windows
-    url: https://windows-rdp-${guid}.${domain}/
+#  - name: windows
+#    url: https://windows-rdp-${guid}.${domain}/
+  - name:  Cloud creds
+    url: /cloud
   - name: gitea
     url: https://gitea-${guid}.${domain}/
