@@ -3,7 +3,8 @@
 
 echo "Starting build process..."
 echo "Removing old site..."
-rm -rf ./www/*
+rm -rf ./www/
+mkdir ./www/
 
 echo "Building new site..."
 # Check if podman exists, otherwise use docker
